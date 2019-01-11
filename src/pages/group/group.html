@@ -1,0 +1,33 @@
+
+<ion-header>
+
+  <ion-navbar color="confab">
+    <ion-title>groups</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+      <ion-item-sliding *ngFor="let group of groups">
+        <ion-item (click)="groupChatPage(group.name, group.img)">
+              <ion-avatar item-left>
+                  <img src="../../../assets/imgs/{{group.img}}.jpg" alt="">
+                </ion-avatar>
+                <h2>{{ group.name }}</h2>
+                <p>{{ group.msg }}</p>
+                <ion-note item-right>{{ group.time }} pm</ion-note>
+        </ion-item>
+        <ion-item-options>
+          <button ion-button color="dark" outline>
+            <ion-icon name="volume-off"></ion-icon>
+            Mute
+          </button>
+          <button ion-button color="danger" outline>
+            <ion-icon name="trash"></ion-icon>
+            Delete
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ion-content>

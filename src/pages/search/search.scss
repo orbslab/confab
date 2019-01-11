@@ -1,0 +1,16 @@
+page-search {
+    ion-card ion-card-content img{
+        border-radius: 50%;
+    }
+    ion-card ion-card-content h3{
+        margin-top: 10px !important;
+        font-size: 25px !important;
+        font-weight: bold;
+    }
+    ion-content .requestButton {
+        margin-left: 20%;
+    }
+    .suggestedInterest button{
+        padding: 10px 8px !important;
+    }
+}

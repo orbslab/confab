@@ -1,0 +1,86 @@
+
+<ion-header>
+
+  <ion-navbar color="confab">
+    <ion-title>profile</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div text-center>
+    <label class="filebutton">
+      <ion-img width="200" height="200" src="../../assets/imgs/{{ profile.image }}.jpg"></ion-img> 
+        <span><input type="file" id="myfile" name="myfile"></span>
+    </label>
+  </div>
+    <ion-card class="profileName">
+      <ion-card-content>
+        <ion-card-title>
+          <ion-row>
+            <ion-col col-11>{{ profile.name }}</ion-col>
+            <ion-col col-1>
+              <button ion-button small clear color="confab1" (click)="editName()" icon-only>
+                <ion-icon name="settings"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-card-title>
+        <p>
+          <ion-row>
+            <ion-col col-11>{{ profile.bio }}</ion-col>
+            <ion-col col-1>
+              <button ion-button small clear color="confab1" (click)="editBio()" icon-only>
+                <ion-icon name="settings"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card [navPush]="friendsList">
+      <ion-card-content>
+          <ion-card-title>
+            Friends
+          </ion-card-title>
+            <h3>Number of Friends</h3>
+            <p>{{ profile.friends }}</p>
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+          <ion-card-content>
+            <ion-card-title>
+              Interests
+            </ion-card-title>
+            <ion-grid>
+              <ion-row>
+                <div *ngFor="let interest of profile.interests">
+                    <ion-col col-4 class="interests">
+                        <button ion-button outline (click)="deleteInterest(interest)" color="confab2">{{ interest }}</button>
+                    </ion-col>
+                </div>
+                <button ion-item color="confab1" block (click)="addInterest()" item-left text-center>
+                  <ion-icon name="add"></ion-icon>
+                  Add New
+                </button>
+              </ion-row>
+            </ion-grid>  
+            <!-- <ul *ngFor="let interest of profile.interests">
+              <li>{{ interest }}</li>
+            </ul> -->
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+            <ion-card-content>
+              <ion-card-title>
+                Contact
+              </ion-card-title>
+              <p>{{ profile.contact }}</p>
+            </ion-card-content>
+          </ion-card>
+  
+  </ion-content>

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar color="confab">
+    <ion-title>
+        <ion-grid>
+            <ion-row>
+              <ion-col col-2>
+                  <ion-avatar [navPush]="profilePage">
+                      <img src="../../assets/imgs/profile1.jpg" alt="" style="border-radius: 50%; width: 50px;">
+                    </ion-avatar>
+              </ion-col>
+              <ion-col col-7 style="font-size: 25px">Confab</ion-col>
+            </ion-row>
+          </ion-grid>
+    </ion-title>
+    <ion-buttons right>
+      <button ion-button [navPush]="aboutPabe" icon-only>
+          <ion-icon name="alert"></ion-icon>
+      </button>
+      <button ion-button [navPush]="profilePage" icon-only>
+          <ion-icon name="person"></ion-icon>
+      </button>
+      
+      
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let chat of chats">
+      <ion-item (click)="chatpage(chat.name, chat.img)">
+        <ion-avatar item-left>
+          <img src="../../../assets/imgs/{{chat.img}}.jpg" alt="">
+        </ion-avatar>
+        <h2>{{ chat.name }}</h2>
+        <p>{{ chat.msg }}</p>
+        <ion-note item-right>{{ chat.time }} pm</ion-note>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button color="dark" outline>
+          <ion-icon name="volume-off"></ion-icon>
+          Mute
+        </button>
+        <button ion-button color="danger" outline>
+          <ion-icon name="trash"></ion-icon>
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

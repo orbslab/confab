@@ -1,0 +1,33 @@
+
+<ion-header>
+
+  <ion-navbar color="confab">
+    <ion-title>friends-list</ion-title>
+    <ion-buttons right>
+        <button ion-button (click)="chatsPage()" icon-only>
+          <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item-sliding *ngFor="let friend of friends">
+      <ion-item (click)="friendProfilePage (friend.img, friend.name, friend.bio, friend.interests, friend.contact)"> 
+        <ion-avatar item-left>
+          <img src="../../../assets/imgs/{{friend.img}}.jpg" alt="">
+        </ion-avatar>
+        <h2>{{ friend.name }}</h2>
+      </ion-item>
+      <ion-item-options>
+        <button ion-button color="danger" outline>
+          <ion-icon name="close"></ion-icon>
+          Unfriend
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

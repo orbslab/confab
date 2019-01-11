@@ -1,0 +1,19 @@
+page-profile {
+  ion-img {
+    border: 5px solid #fff;
+    border-radius: 50%;
+  }
+  .interests button {
+      padding: 10px 8px !important;
+      margin: 5px 0 !important;
+  }
+  ion-content .profileName {
+    margin-top: -115px;
+    padding-top: 115px;
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(191,240,230,1) 80%);
+  }
+  // File Upload with Image
+label span input {
+   display: none;
+}
+}

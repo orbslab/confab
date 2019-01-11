@@ -1,0 +1,58 @@
+
+<ion-header>
+
+  <ion-navbar color="confab">
+    <ion-title>friend-profile</ion-title>
+    <ion-buttons right>
+      <button ion-button (click)="chatsPage()" icon-only>
+          <ion-icon name="home"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div text-center>
+      <ion-img width="200" height="200" src="../../assets/imgs/{{ friend.friendImg }}.jpg"></ion-img> 
+      <!-- <img src=> -->
+  </div>
+  <ion-card class="friendName">
+    <ion-card-content>
+      <ion-card-title>
+        {{ friend.friendName }}
+      </ion-card-title>
+      <p>
+        {{ friend.friendBio }}
+      </p>
+    </ion-card-content>
+  </ion-card>
+  
+    <ion-card>
+        <ion-card-content>
+          <ion-card-title>
+            Interests
+          </ion-card-title>
+          <ion-grid>
+            <ion-row>
+              <div *ngFor="let interest of friend.friendInterest">
+                  <ion-col col-4 class="interests">
+                      <button ion-button outline color="confab2">{{ interest }}</button>
+                  </ion-col>
+              </div>
+            </ion-row>
+          </ion-grid>  
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card>
+          <ion-card-content>
+            <ion-card-title>
+              Contact
+            </ion-card-title>
+            <p>{{ friend.friendContact }}</p>
+          </ion-card-content>
+        </ion-card>
+
+</ion-content>

@@ -1,0 +1,62 @@
+
+<ion-header>
+
+  <ion-navbar color="confab">
+    <ion-title>
+      <ion-searchbar></ion-searchbar>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+      <div padding>
+          <button ion-button
+          class="requestButton"
+          color="confab2"
+          outline
+          [navPush]="friendRequest"
+         >Show Friend Requests</button>
+         <hr>
+           <h5>Suggested People</h5>
+      </div>
+  
+        <ion-card *ngFor="let suggestion of suggestions">
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col col-4>
+                    <img src="../../assets/imgs/{{ suggestion.image }}.jpg" alt="Image" style="width: 100px">
+                </ion-col>
+                <ion-col col-8>
+                    <h3>{{ suggestion.name }}</h3>
+                    <p>{{ suggestion.bio }}</p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+              <h3>Interests:</h3>
+                  <ion-row>
+                    <div *ngFor="let interest of suggestion.interests" justify-content-center>
+                        <ion-col col-4 class="suggestedInterest">
+                            <button ion-button outline color="confab2">{{ interest }}</button>
+                          </ion-col>
+                    </div>
+                    
+                  </ion-row>
+                <button ion-button round color="confab1" block>Connect</button>
+                <br>
+          </ion-card-content>
+        </ion-card>
+  <!-- <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>
+            <button ion-button round>hello</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card> -->
+</ion-content>
