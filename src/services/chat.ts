@@ -1,29 +1,48 @@
+import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import * as io from 'socket.io-client';
+import { Observable } from 'rxjs/observable';
+
+@Injectable()
 export class ChatServices {
-  messages = [
-    {
-      user: 'incoming',
-      text: 'Have you finished homework?'
+
+  constructor(private http: HttpClient) {}
+
+  private socket = io('http://localhost:3000/');
+
+  messages = [];
+
+  joinChat(data) {
+    this.socket.emit('join pm', data);
+  }
+
+  getMessages(chatId) {
+    return this.http.get<{message: string, info: any}>('http://localhost:3000/confab/privateChat/'+ chatId);
+  }
+
+  sendMsg(cId: string, senderInfo: string, sendEmail: string, userMsg: string){
+    const txt = {chatId: cId, sender: senderInfo, email: sendEmail, message: userMsg};
+    this.socket.emit('private message', txt);
+    this.http.post<{msg: string}>('http://localhost:3000/confab/privateChat/', txt)
+    .subscribe((doc) => {
+      this.messages.push(txt);
+      console.log(doc.msg);
     },
-    {
-      user: 'incoming',
-      text: 'Whats the deadline'
-    },
-    {
-      user: 'outgoing',
-      text: 'No i haven\'t done yet'
-    },
-    {
-      user: 'outgoing',
-      text: 'It\'s next monday'
-    },
-    {
-      user: 'incoming',
-      text: 'let me know when you\'re done!!'
-    }
-    
-  ];
-  recieveMsg(message: string){
-    const txt = {user: 'outgoing', text: message}
-    this.messages.push(txt);
+    error => {
+      console.log(error);
+    });
+
+    console.log(txt);
+  }
+
+  newMessage() {
+    let observable = new Observable<{sender: string, message: string}>(observable => {
+      this.socket.on('new private message', (data) => {
+        observable.next(data);
+      });
+    });
+
+    console.log(observable);
+    return observable;
   }
 }

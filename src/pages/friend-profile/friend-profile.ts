@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
-import { FriendsListServices } from '../../services/friendsList.service';
 
 @Component({
   selector: 'page-friend-profile',
@@ -12,12 +11,10 @@ export class FriendProfilePage implements OnInit {
   friend;
 
 
-  constructor(private friendListService: FriendsListServices,
-              private navParams: NavParams,
+  constructor(private navParams: NavParams,
               private navCtrl: NavController) {}
 
   ngOnInit() {
-    this.friendProfile = this.friendListService.friends;
     this.friend = this.navParams.data;
   }
 

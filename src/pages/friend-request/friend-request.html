@@ -15,25 +15,26 @@
         <ion-row>
           <ion-col col-4>
             <ion-avatar>
-              <img src="../../assets/imgs/{{ requests.img }}.jpg" alt="" style="height: 80px; widows: 60px;">
+              <img src="../../assets/imgs/ppl1.jpg" alt="" style="height: 80px; widows: 60px;">
             </ion-avatar>
           </ion-col>
           <ion-col col-8>
-            <h3>{{ requests.name }}</h3>
-            <h5>{{ requests.bio }}</h5>
+            <h3>{{ requests.senname }}</h3>
+            <h5>{{ requests.senbio }}</h5>
           </ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid>
         <ion-row>
           <ion-col col-6>
-              <button ion-button color="confab" outline>Connect</button>
+              <button ion-button color="secondary" outline (click)="accept(requests._id, requests.sender, requests.reciver)">Accept</button>
           </ion-col>
           <ion-col col-6>
-              <button ion-button color="danger" outline>Ignore</button>
+              <button ion-button color="danger" outline (click)="ignor(requests._id)">Ignore</button>
           </ion-col>
         </ion-row>
       </ion-grid>
     </ion-card-content>
-  </ion-card>
+  </ion-card><br>
+  <button ion-button color="secondory" roundoutline [navPush]="friendsList">See Friend List</button>
 </ion-content>

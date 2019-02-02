@@ -1,6 +1,6 @@
-import {Component, OnInit} from "@angular/core";
-import {ChatsServices} from "../../services/chats";
-import {ChatPage} from "./chat/chat";
+import { Component, OnInit } from "@angular/core";
+import { ChatsServices } from "../../services/chats";
+import { ChatPage } from "./chat/chat";
 import { ProfilePage } from "../profile/profile";
 import { AboutPage } from "../about/about";
 import { NavController } from "ionic-angular";
@@ -20,7 +20,7 @@ export class ChatsPage implements OnInit{
   ngOnInit(){
     this.chats = this.chatsService.chats;
   }
-  chatpage(name, img) {
-    this.navCtrl.push(ChatPage, {userName: name, userImg: img});
+  chatpage(chatId) {
+    this.navCtrl.push(ChatPage, chatId);
   }
 }

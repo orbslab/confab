@@ -10,7 +10,7 @@
 <ion-content padding>
     <ion-list>
       <ion-item-sliding *ngFor="let group of groups">
-        <ion-item (click)="groupChatPage(group.name, group.img)">
+        <ion-item (click)="groupChatPage(group.gId)">
               <ion-avatar item-left>
                   <img src="../../../assets/imgs/{{group.img}}.jpg" alt="">
                 </ion-avatar>

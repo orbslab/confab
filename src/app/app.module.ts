@@ -1,4 +1,3 @@
-
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -20,13 +19,14 @@ import { FriendRequestService } from '../services/friendRequest.service';
 import { FriendRequestPage } from '../pages/friend-request/friend-request';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
-import { AuthService } from '../services/auth.service';
+import { AuthServiceProvider } from '../services/auth.service';
 import { GroupServices } from '../services/group.service';
 import { GroupChatPage } from '../pages/group/group-chat/group-chat';
 import { GroupChatServices } from '../services/groupchat.service';
 import { FriendsListPage } from '../pages/friends-list/friends-list';
 import { FriendProfilePage } from '../pages/friend-profile/friend-profile';
 import { FriendsListServices } from '../services/friendsList.service';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -47,6 +47,7 @@ import { FriendsListServices } from '../services/friendsList.service';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp, {
       tabsHideOnSubPages: true
     })
@@ -79,7 +80,7 @@ import { FriendsListServices } from '../services/friendsList.service';
     SuggestionService,
     FriendRequestService,
     FriendsListServices,
-    AuthService,
+    AuthServiceProvider,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

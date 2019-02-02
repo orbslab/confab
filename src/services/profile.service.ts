@@ -1,37 +1,32 @@
+import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+
+@Injectable()
 export class ProfileService {
-    profiles = {
-        image: 'profile1',
-        name: 'Bruce Wayne',
-        bio: 'Hello, I am Wayne, Bruce Wayne. I have lot of resource and I can get whatever I Want.',
-        friends: '4',
-        interests: ['Reading', 'Traveling', 'Shopping', 'Eating'],
-        contact: 'batman@hotmail.com'
+    constructor(private http: HttpClient) {}
+    
+    getProfile(email) {
+        return this.http.get<{message: string, info: any}>('http://localhost:3000/confab/profile/'+ email);
     }
-    updateName(name: string){
-        if(name == "") {
-            return;
-        }else {
-            this.profiles.name = name;
-        }
+
+    editProfile(email, type, value) {
+        this.http.get<{message: string, info: any}>('http://localhost:3000/confab/upprofile/'+email+'/'+type+'/'+value)
+        .subscribe(res => {
+            console.log(res.message);
+        });
     }
-    updateBio(bio: string) {
-        if(bio =="") {
-            return;
-        }else {
-            
-        this.profiles.bio = bio;
-        }
+
+    insertInterest(email, value) {
+        this.http.get<{message: string, info: any}>('http://localhost:3000/confab/upinterest/'+email+'/'+value)
+        .subscribe(res => {
+            console.log(res.message);
+        });
     }
-    insertInterest(input: string){
-        this.profiles.interests.push(input);
-    }
-    deleteInterest(input: string){
-        const interests = this.profiles.interests
-        for (const i in interests) {
-            if (input === interests[i]) {
-                let di: number = parseInt(i);
-                interests.splice(di, 1);
-            }
-        }
+
+    deleteInterest(email, value){
+        this.http.get<{message: string, info: any}>('http://localhost:3000/confab/delinterest/'+email+'/'+value)
+        .subscribe(res => {
+            console.log(res.message);
+        });
     }
 }

@@ -3,7 +3,7 @@
 
   <ion-navbar color="confab">
     <ion-title>
-      <ion-searchbar></ion-searchbar>
+      <ion-searchbar type="text" name="search" [(ngModel)]="search" (change)="onChange()"></ion-searchbar>
     </ion-title>
   </ion-navbar>
 
@@ -11,15 +11,35 @@
 
 
 <ion-content>
-      <div padding>
-          <button ion-button
-          class="requestButton"
-          color="confab2"
-          outline
-          [navPush]="friendRequest"
-         >Show Friend Requests</button>
-         <hr>
-           <h5>Suggested People</h5>
+      <ion-card *ngFor="let res of searchRes">
+        <ion-card-content>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-4>
+                  <img src="../../assets/imgs/profile1.jpg" alt="Image" style="width: 100px">
+              </ion-col>
+              <ion-col col-8>
+                  <h3>{{ res.name }}</h3>
+                  <p>{{ res.bio }}</p>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+            <h3>Interests:</h3>
+                <ion-row>
+                  <div *ngFor="let interest of res.interests" justify-content-center>
+                      <ion-col col-4 class="suggestedInterest">
+                          <button ion-button outline color="confab2">{{ interest }}</button>
+                        </ion-col>
+                  </div>
+                  
+                </ion-row>
+              <button ion-button round color="confab1" block (click)="connect(res.email)">Connect</button>
+              <br>
+        </ion-card-content>
+      </ion-card>
+  
+      <div padding><hr>
+        <h5>Suggested People</h5>
       </div>
   
         <ion-card *ngFor="let suggestion of suggestions">
@@ -27,7 +47,7 @@
             <ion-grid>
               <ion-row>
                 <ion-col col-4>
-                    <img src="../../assets/imgs/{{ suggestion.image }}.jpg" alt="Image" style="width: 100px">
+                    <img src="../../assets/imgs/ppl6.jpg" alt="Image" style="width: 100px">
                 </ion-col>
                 <ion-col col-8>
                     <h3>{{ suggestion.name }}</h3>
@@ -44,19 +64,8 @@
                     </div>
                     
                   </ion-row>
-                <button ion-button round color="confab1" block>Connect</button>
+                <button ion-button round color="confab1" block (click)="connect(suggestion.email)">Connect</button>
                 <br>
           </ion-card-content>
         </ion-card>
-  <!-- <ion-card>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col col-6>
-            <button ion-button round>hello</button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card> -->
 </ion-content>

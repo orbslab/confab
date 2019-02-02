@@ -1,38 +1,48 @@
+import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import * as io from 'socket.io-client';
+import { Observable } from 'rxjs/observable';
+
+@Injectable()
 export class GroupChatServices {
-    messages = [
-      {
-        user: 'incoming',
-        text: 'Have you finished homework?'
-      },
-      {
-        user: 'incoming',
-        text: 'Whats the deadline'
-      },
-      {
-        user: 'outgoing',
-        text: 'No i haven\'t done yet'
-      },
-      {
-        user: 'incoming',
-        text: 'Have you finished homework?'
-      },
-      {
-        user: 'incoming',
-        text: 'Whats the deadline'
-      },
-      {
-        user: 'outgoing',
-        text: 'It\'s next monday'
-      },
-      {
-        user: 'incoming',
-        text: 'let me know when you\'re done!!'
-      }
-      
-    ];
-    recieveMsg(message: string){
-      const txt = {user: 'outgoing', text: message}
-      this.messages.push(txt);
-    }
+  constructor(private http: HttpClient) {}
+
+  private socket = io('http://localhost:3000/');
+
+  messages = [];
+
+  joinGroup(data) {
+    this.socket.emit('join', data);
   }
+
+  getMessages(groupId) {
+    return this.http.get<{message: string, info: any}>('http://localhost:3000/confab/groupChat/'+ groupId);
+  }
+
+  sendMsg(gId: string, senderInfo: string, userEmail: string, userMsg: string){
+    const txt = {gid: gId, sender: senderInfo, email: userEmail, message: userMsg};
+    this.http.post<{msg: string}>('http://localhost:3000/confab/groupChat/', txt)
+    .subscribe((doc) => {
+      this.messages.push(txt);
+      console.log(doc.msg);
+    },
+    error => {
+      console.log(error);
+    });
+
+    console.log(txt);
+    this.socket.emit('message', txt);
+  }
+
+  newMessage() {
+    let observable = new Observable<{sender: string, message: string}>(observable => {
+      this.socket.on('new message', (data) => {
+        observable.next(data);
+      });
+    });
+
+    console.log(observable);
+    return observable;
+  }
+}
   

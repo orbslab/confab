@@ -18,8 +18,8 @@ export class GroupPage implements OnInit {
   ngOnInit() {
     this.groups = this.groupService.group;
   }
-  groupChatPage(name, img) {
-    this.navCtrl.push(GroupChatPage, {userName: name, userImg: img});
+  groupChatPage(gId) {
+    this.navCtrl.push(GroupChatPage, gId);
   }
 
 }

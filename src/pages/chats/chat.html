@@ -27,7 +27,7 @@
 <ion-content padding>
   <ion-list>
     <ion-item-sliding *ngFor="let chat of chats">
-      <ion-item (click)="chatpage(chat.name, chat.img)">
+      <ion-item (click)="chatpage(chat.chatId)">
         <ion-avatar item-left>
           <img src="../../../assets/imgs/{{chat.img}}.jpg" alt="">
         </ion-avatar>

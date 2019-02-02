@@ -3,9 +3,10 @@
           <ion-title>
             <ion-item color="confab">
                 <ion-avatar item-left>
-                    <img src="../../../assets/imgs/{{ user.userImg }}.jpg" alt="">
+                    <img src="../../../assets/imgs/profile1.jpg" alt="">
                   </ion-avatar>
-                  {{ user.userName }}
+                  <!-- {{ user.userName }} -->
+                  Group Name
             </ion-item>
           </ion-title>
         </ion-navbar>
@@ -15,8 +16,9 @@
         <div class="group">
           <div class="chat-box">
             <div class="message-area"  #scrollMe>
-              <div class="message" *ngFor="let message of messages" [class]="message.user == 'outgoing' ? 'outgoing' : 'incoming'">
-                <p>{{message.text}}</p>
+              <div class="message" *ngFor="let msg of messages" [class]="msg.email == email ? 'outgoing' : 'incoming'">
+                <span>{{ msg.sender }}</span>
+                <p>{{msg.message}}</p>
               </div>
             </div>
       

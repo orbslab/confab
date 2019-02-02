@@ -1,24 +1,31 @@
-import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
 import { AlertController } from 'ionic-angular';
 import { FriendsListPage } from '../friends-list/friends-list';
+import { AuthServiceProvider } from '../../services/auth.service';
 
 @Component({
   selector: 'page-profile',
   templateUrl: 'profile.html',
 })
-export class ProfilePage implements OnInit {
+export class ProfilePage {
 
-  profile;
+  profile = [];
+  email = this.auth.getUserInfo().email;
   friendsList = FriendsListPage;
 
-  constructor(public profileService: ProfileService,
-    public alertCtrl: AlertController) {}
-
-  ngOnInit() {
-    this.profile = this.profileService.profiles;
+  constructor (
+    public profileService: ProfileService,
+    public alertCtrl: AlertController,
+    private auth: AuthServiceProvider
+  ) {
+    this.profileService.getProfile(this.email)
+    .subscribe(data => {
+      this.profile = data.info;
+      console.log(data.info);
+    });
   }
+
   editName() {
     let editName = this.alertCtrl.create({
       title: 'Edit Name',
@@ -39,7 +46,7 @@ export class ProfilePage implements OnInit {
         {
           text: 'Update',
           handler: data => {
-              this.profileService.updateName(data.name);
+              this.profileService.editProfile(this.email, 'name', data.name);
           }
         }
       ]
@@ -66,13 +73,14 @@ export class ProfilePage implements OnInit {
         {
           text: 'Update',
           handler: data => {
-            this.profileService.updateBio(data.bio);
+            this.profileService.editProfile(this.email, 'bio', data.bio);
           }
         }
       ]
     });
     editBio.present();
   }
+  
   addInterest() {
     let prompt = this.alertCtrl.create({
       title: 'Add Interest',
@@ -94,7 +102,7 @@ export class ProfilePage implements OnInit {
         {
           text: 'Save',
           handler: data => {
-            this.profileService.insertInterest(data.interest);
+            this.profileService.insertInterest(this.email, data.interest);
           }
         }
       ]
@@ -116,7 +124,7 @@ export class ProfilePage implements OnInit {
         {
           text: 'Delete',
           handler: () => {
-            this.profileService.deleteInterest(interest);
+            this.profileService.deleteInterest(this.email, interest);
           }
         }
       ]
