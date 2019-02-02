@@ -167,7 +167,7 @@ app.get('/confab/upinterest/:email/:value', (req, res, next) => {
 app.get('/confab/delinterest/:email/:value', (req, res, next) => {
   User.findOneAndUpdate({email: req.params.email}, { $pull: {interests: req.params.value}}).then(response => {
     res.status(200).json({
-      message: "Interest Update Request Goted",
+      message: "Interest Delete Request Goted",
       info: response
     });
   })
