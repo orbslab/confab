@@ -29,7 +29,7 @@ export class RegisterPage {
       bio: this.registerCredentials.bio
     };
 
-    this.http.post<{message: string}>('http://localhost:3000/confab/users/', user)
+    this.http.post<{message: string}>('http://appconfab.herokuapp.com/confab/users/', user)
     .subscribe((success) => {
       if(success) {
         this.stopLoading();

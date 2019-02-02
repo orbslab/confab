@@ -27,7 +27,7 @@ export class SearchPage {
     }
 
     onChange() {
-      this.http.get<{message: string, info: any}>('http://localhost:3000/confab/search/'+ this.search)
+      this.http.get<{message: string, info: any}>('http://appconfab.herokuapp.com/confab/search/'+ this.search)
       .subscribe(res => {
         this.searchRes = res.info;
       })
@@ -38,7 +38,7 @@ export class SearchPage {
     connect(reqReciver) {
       console.log(reqReciver);
       const info = {sender: this.auth.getUserInfo().email, senname: this.auth.getUserInfo().name, senbio: this.auth.getUserInfo().bio, reciver: reqReciver};
-      this.http.post<{msg: string}>('http://localhost:3000/confab/friendrequest/', info)
+      this.http.post<{msg: string}>('http://appconfab.herokuapp.com/confab/friendrequest/', info)
       .subscribe((doc) => {
         console.log(doc.msg);
       },

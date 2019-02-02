@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/observable';
 export class GroupChatServices {
   constructor(private http: HttpClient) {}
 
-  private socket = io('http://localhost:3000/');
+  private socket = io('http://appconfab.herokuapp.com/');
 
   messages = [];
 
@@ -16,12 +16,12 @@ export class GroupChatServices {
   }
 
   getMessages(groupId) {
-    return this.http.get<{message: string, info: any}>('http://localhost:3000/confab/groupChat/'+ groupId);
+    return this.http.get<{message: string, info: any}>('http://appconfab.herokuapp.com/confab/groupChat/'+ groupId);
   }
 
   sendMsg(gId: string, senderInfo: string, userEmail: string, userMsg: string){
     const txt = {gid: gId, sender: senderInfo, email: userEmail, message: userMsg};
-    this.http.post<{msg: string}>('http://localhost:3000/confab/groupChat/', txt)
+    this.http.post<{msg: string}>('http://appconfab.herokuapp.com/confab/groupChat/', txt)
     .subscribe((doc) => {
       this.messages.push(txt);
       console.log(doc.msg);
