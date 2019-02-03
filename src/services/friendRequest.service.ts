@@ -6,6 +6,6 @@ export class FriendRequestService {
     constructor(private http: HttpClient) {}
 
     getRequests(email) {
-        return this.http.get<{message: string, info: any}>('http://appconfab.herokuapp.com/confab/friendrequest/'+ email);
+        return this.http.get<{message: string, info: any}>('https://appconfab.herokuapp.com/confab/friendrequest/'+ email);
     }
 }

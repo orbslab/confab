@@ -6,6 +6,6 @@ export class SuggestionService {
     constructor(private http: HttpClient) {}
 
     getSuggestion(value) {
-        return this.http.get<{message: string, info: any}>('http://appconfab.herokuapp.com/confab/suggestion/'+ value);
+        return this.http.get<{message: string, info: any}>('https://appconfab.herokuapp.com/confab/suggestion/'+ value);
     }
 }

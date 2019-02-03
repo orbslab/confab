@@ -46,7 +46,7 @@ export class LoginPage {
 
   public login() {
     this.showLoading();
-    this.http.get<{message: string, info: any}>('http://appconfab.herokuapp.com/confab/users/'+ this.registerCredentials.email)
+    this.http.get<{message: string, info: any}>('https://appconfab.herokuapp.com/confab/users/'+ this.registerCredentials.email)
     .subscribe((userData) => {
       if(this.registerCredentials.password === userData.info.password && this.registerCredentials.email === userData.info.email) {
         this.auth.UserInfo(userData.info.name, userData.info.email, userData.info.bio, userData.info.interests, userData.info.friends);

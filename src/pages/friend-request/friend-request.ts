@@ -27,17 +27,17 @@ export class FriendRequestPage {
 
   accept(id, sender, reciver) {
     console.log("Request For Add Friend");
-    this.http.get<{message: string, info: any}>('http://appconfab.herokuapp.com/confab/addfriend/'+sender+'/'+reciver)
+    this.http.get<{message: string, info: any}>('https://appconfab.herokuapp.com/confab/addfriend/'+sender+'/'+reciver)
     .subscribe(res => {
-      this.http.get<{message: string, info: any}>('http://appconfab.herokuapp.com/confab/addfriend/'+reciver+'/'+sender)
+      this.http.get<{message: string, info: any}>('https://appconfab.herokuapp.com/confab/addfriend/'+reciver+'/'+sender)
       .subscribe(res => {
-        this.http.delete('http://appconfab.herokuapp.com/confab/addfriend/'+id)
+        this.http.delete('https://appconfab.herokuapp.com/confab/addfriend/'+id)
         .subscribe(data => {
           const users = {
             user1: sender, 
             user2: reciver
           };
-          this.http.post<{msg: string}>('http://appconfab.herokuapp.com/confab/createpm/', users)
+          this.http.post<{msg: string}>('https://appconfab.herokuapp.com/confab/createpm/', users)
           .subscribe(success => {
             this.friendRequestService.getRequests(this.sender)
             .subscribe(data => {
@@ -50,7 +50,7 @@ export class FriendRequestPage {
   }
 
   ignor(id) {
-    this.http.delete('http://appconfab.herokuapp.com/confab/addfriend/'+id)
+    this.http.delete('https://appconfab.herokuapp.com/confab/addfriend/'+id)
     .subscribe(data => {
       this.friendRequestService.getRequests(this.sender)
       .subscribe(data => {

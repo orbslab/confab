@@ -8,7 +8,7 @@ export class ChatServices {
 
   constructor(private http: HttpClient) {}
 
-  private socket = io('http://appconfab.herokuapp.com/');
+  private socket = io('https://appconfab.herokuapp.com/');
 
   messages = [];
 
@@ -17,13 +17,13 @@ export class ChatServices {
   }
 
   getMessages(chatId) {
-    return this.http.get<{message: string, info: any}>('http://appconfab.herokuapp.com/confab/privateChat/'+ chatId);
+    return this.http.get<{message: string, info: any}>('https://appconfab.herokuapp.com/confab/privateChat/'+ chatId);
   }
 
   sendMsg(cId: string, senderInfo: string, sendEmail: string, userMsg: string){
     const txt = {chatId: cId, sender: senderInfo, email: sendEmail, message: userMsg};
     this.socket.emit('private message', txt);
-    this.http.post<{msg: string}>('http://appconfab.herokuapp.com/confab/privateChat/', txt)
+    this.http.post<{msg: string}>('https://appconfab.herokuapp.com/confab/privateChat/', txt)
     .subscribe((doc) => {
       this.messages.push(txt);
       console.log(doc.msg);
