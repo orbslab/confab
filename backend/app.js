@@ -10,7 +10,7 @@ const pmlist      = require('./models/pmList');
 
 const app = express();
 
-mongoose.connect("mongodb+srv://sadi:8DCdoYMQaOQXC87y@cluster-af195.mongodb.net/confab?retryWrites=true")
+mongoose.connect("mongodb+srv://sadi:8DCdoYMQaOQXC87y@cluster-af195.mongodb.net/confab?retryWrites=true", { useNewUrlParser: true })
   .then(() => {
     console.log('Connected To Database!!');
   }).catch(() => {
