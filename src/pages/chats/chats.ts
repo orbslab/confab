@@ -28,6 +28,14 @@ export class ChatsPage {
       this.chats = res.info;
     });
   }
+
+  chatName(user1, username1, user2, username2) {
+    if(this.email == user1) {
+      return username2;
+    } else if(this.email == user2) {
+      return username1;
+    }
+  }
   
   chatpage(chatId) {
     this.navCtrl.push(ChatPage, chatId);

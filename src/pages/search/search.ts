@@ -39,7 +39,7 @@ export class SearchPage {
       this.search = '';
     }
 
-    connect(reqReciver) {
+    connect(reqReciver, recname) {
       for(let i of this.usrFriends) {
         if(reqReciver == i) {
           this.access = false;
@@ -48,7 +48,7 @@ export class SearchPage {
       }
 
       if(this.access) {
-        const info = {sender: this.auth.getUserInfo().email, senname: this.auth.getUserInfo().name, senbio: this.auth.getUserInfo().bio, reciver: reqReciver};
+        const info = {sender: this.auth.getUserInfo().email, senname: this.auth.getUserInfo().name, senbio: this.auth.getUserInfo().bio, reciver: reqReciver, recivername: recname};
         this.http.post<{msg: string}>('https://appconfab.herokuapp.com/confab/friendrequest/', info)
         .subscribe((doc) => {
           console.log(doc.msg);

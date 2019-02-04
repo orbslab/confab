@@ -12,6 +12,7 @@ export class FriendRequestPage {
 
   friendRequests;
   sender = this.auth.getUserInfo().email;
+  sendername = this.auth.getUserInfo().name;
   friendsList = FriendsListPage;
 
   constructor(
@@ -25,7 +26,7 @@ export class FriendRequestPage {
     });
   }
 
-  accept(id, sender, reciver) {
+  accept(id, sender, sendername, reciver, recivername) {
     console.log("Request For Add Friend");
     this.http.get<{message: string, info: any}>('https://appconfab.herokuapp.com/confab/addfriend/'+sender+'/'+reciver)
     .subscribe(res => {
@@ -34,8 +35,10 @@ export class FriendRequestPage {
         this.http.delete('https://appconfab.herokuapp.com/confab/addfriend/'+id)
         .subscribe(data => {
           const users = {
-            user1: sender, 
-            user2: reciver
+            user1: sender,
+            username1: sendername,
+            user2: reciver,
+            username2: recivername
           };
           this.http.post<{msg: string}>('https://appconfab.herokuapp.com/confab/createpm/', users)
           .subscribe(success => {

@@ -93,7 +93,9 @@ app.get('/confab/privateChat/:chatId', (req, res, next) => {
 app.post('/confab/createpm/', (req, res, next) => {
   const pc = new pmlist({
     user1: req.body.user1,
-    user2: req.body.user2
+    username1: req.body.username1,
+    user2: req.body.user2,
+    username2: req.body.username1
   });
   pc.save().then(sendMsg => {
     res.status(201).json({
@@ -234,7 +236,8 @@ app.post('/confab/friendrequest/', (req, res, next) => {
     sender: req.body.sender,
     senname: req.body.senname,
     senbio: req.body.senbio,
-    reciver: req.body.reciver
+    reciver: req.body.reciver,
+    recivername: req.body.recivername
   });
   send.save().then(sendMsg => {
     res.status(201).json({
