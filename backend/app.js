@@ -95,7 +95,7 @@ app.post('/confab/createpm/', (req, res, next) => {
     user1: req.body.user1,
     username1: req.body.username1,
     user2: req.body.user2,
-    username2: req.body.username1
+    username2: req.body.username2
   });
   pc.save().then(sendMsg => {
     res.status(201).json({
