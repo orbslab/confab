@@ -104,7 +104,7 @@ app.post('/confab/createpm/', (req, res, next) => {
 
 // Get Private Message List
 app.get('/confab/pmlist/:email', (req, res, next) => {
-  pm.find({$or: [{user1: req.params.email}, {user2: req.params.email}]}).then(response => {
+  pmlist.find({$or: [{user1: req.params.email}, {user2: req.params.email}]}).then(response => {
     res.status(200).json({
       message: "Request For Chat List Is Goted",
       info: response

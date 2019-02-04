@@ -24,6 +24,7 @@ export class ChatsPage {
     this.chatsService.getChats(this.email)
     .subscribe(res => {
       console.log(res.message);
+      console.log(res.info);
       this.chats = res.info;
     });
   }
