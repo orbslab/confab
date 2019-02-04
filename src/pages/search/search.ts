@@ -12,7 +12,11 @@ export class SearchPage {
 
   suggestions;
   search = '';
+  show = true;
+  access = true;
   searchRes;
+  usrEmail = this.auth.getUserInfo().email;
+  usrFriends = this.auth.getUserInfo().friends;
   usrInterests = this.auth.getUserInfo().interests;
  
   constructor(public alerCtrl: AlertController,
@@ -36,14 +40,35 @@ export class SearchPage {
     }
 
     connect(reqReciver) {
-      console.log(reqReciver);
-      const info = {sender: this.auth.getUserInfo().email, senname: this.auth.getUserInfo().name, senbio: this.auth.getUserInfo().bio, reciver: reqReciver};
-      this.http.post<{msg: string}>('https://appconfab.herokuapp.com/confab/friendrequest/', info)
-      .subscribe((doc) => {
-        console.log(doc.msg);
-      },
-      error => {
-        console.log(error);
+      for(let i of this.usrFriends) {
+        if(reqReciver == i) {
+          this.access = false;
+          break;
+        }
+      }
+
+      if(this.access) {
+        const info = {sender: this.auth.getUserInfo().email, senname: this.auth.getUserInfo().name, senbio: this.auth.getUserInfo().bio, reciver: reqReciver};
+        this.http.post<{msg: string}>('https://appconfab.herokuapp.com/confab/friendrequest/', info)
+        .subscribe((doc) => {
+          console.log(doc.msg);
+        },
+        error => {
+          console.log(error);
+        });
+      }
+      else {
+        console.log('Already Friend');
+      }
+
+      this.show = false;
+    }
+
+    doRefresh(event) {
+      this.suggestionService.getSuggestion(this.usrInterests)
+      .subscribe(data => {
+        this.suggestions = data.info;
+        event.complete();
       });
     }
 

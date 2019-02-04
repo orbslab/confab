@@ -22,4 +22,9 @@ export class GroupPage implements OnInit {
     this.navCtrl.push(GroupChatPage, gId);
   }
 
+  doRefresh(event) {
+    this.groups = this.groupService.group;
+    event.complete();
+  }
+
 }

@@ -19,12 +19,20 @@
       <button ion-button [navPush]="profilePage" icon-only>
           <ion-icon name="person"></ion-icon>
       </button>
-      
-      
     </ion-buttons>
   </ion-navbar>
 </ion-header>
+
 <ion-content padding>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
+      
   <ion-list>
     <ion-item-sliding *ngFor="let chat of chats">
       <ion-item (click)="chatpage(chat.chatId)">

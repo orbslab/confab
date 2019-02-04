@@ -58,4 +58,12 @@ export class FriendRequestPage {
       });
     });
   }
+
+  doRefresh(event) {
+    this.friendRequestService.getRequests(this.sender)
+    .subscribe(data => {
+      this.friendRequests = data.info;
+      event.complete();
+    });
+  }
 }

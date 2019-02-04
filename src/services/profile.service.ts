@@ -10,10 +10,7 @@ export class ProfileService {
     }
 
     editProfile(email, type, value) {
-        this.http.get<{message: string, info: any}>('https://appconfab.herokuapp.com/confab/upprofile/'+email+'/'+type+'/'+value)
-        .subscribe(res => {
-            console.log(res.message);
-        });
+        return this.http.get<{message: string, info: any}>('https://appconfab.herokuapp.com/confab/upprofile/'+email+'/'+type+'/'+value);
     }
 
     insertInterest(email, value) {

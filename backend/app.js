@@ -89,6 +89,32 @@ app.get('/confab/privateChat/:chatId', (req, res, next) => {
   });
 });
 
+//Create Private Chat
+app.post('/confab/createpm/', (req, res, next) => {
+  const pc = new pmlist({
+    user1: req.body.user1,
+    user2: req.body.user2
+  });
+  pc.save().then(sendMsg => {
+    res.status(201).json({
+      msg: "New Private Chat Created"
+    });
+  });
+});
+
+// Get Private Message List
+app.get('/confab/pmlist/:email', (req, res, next) => {
+  pm.find({$or: [{user1: req.params.email}, {user2: req.params.email}]}).then(response => {
+    res.status(200).json({
+      message: "Request For Chat List Is Goted",
+      info: response
+    });
+  })
+  .catch(err => {
+    console.log(err);
+  });
+});
+
 // Send Group Message
 app.post('/confab/groupChat/', (req, res, next) => {
   const msg = new gm({
@@ -251,19 +277,6 @@ app.delete('/confab/addfriend/:id', (req, res, next) => {
   })
   .catch(err => {
     console.log(err);
-  });
-});
-
-//Create Private Chat
-app.post('/confab/createpm/', (req, res, next) => {
-  const pc = new pmlist({
-    user1: req.body.user1,
-    user2: req.body.user2
-  });
-  pc.save().then(sendMsg => {
-    res.status(201).json({
-      msg: "New Private Chat Created"
-    });
   });
 });
 

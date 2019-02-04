@@ -1,14 +1,19 @@
-
 <ion-header>
-
   <ion-navbar color="confab">
     <ion-title>profile</ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
   <div text-center>
     <label class="filebutton">
       <ion-img width="200" height="200" src="../../assets/imgs/profile1.jpg"></ion-img> 
@@ -45,8 +50,7 @@
           <ion-card-title>
             Friends
           </ion-card-title>
-            <h3>Number of Friends</h3>
-            <p>{{ profile.friends }}</p>
+            <h3>See Friend List</h3>
         </ion-card-content>
       </ion-card>
 

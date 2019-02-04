@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, NavController } from 'ionic-angular';
+import { ProfileService } from '../../services/profile.service';
 
 @Component({
   selector: 'page-friend-profile',
@@ -8,18 +9,36 @@ import { NavParams, NavController } from 'ionic-angular';
 export class FriendProfilePage implements OnInit {
 
   friendProfile;
-  friend;
+  friend = [];
+  email;
 
 
-  constructor(private navParams: NavParams,
-              private navCtrl: NavController) {}
+  constructor ( 
+    private navParams: NavParams,
+    private navCtrl: NavController,
+    private profileService: ProfileService
+  ) {
+    this.profileService.getProfile(this.navParams.data)
+    .subscribe(res => {
+      console.log(res.info);
+      this.friend = res.info;
+    });
+  }
 
   ngOnInit() {
-    this.friend = this.navParams.data;
+    console.log(this.friend);
   }
 
   chatsPage() {
     this.navCtrl.popToRoot();
+  }
+
+  doRefresh(event) {
+    this.profileService.getProfile(this.navParams.data)
+    .subscribe(data => {
+      this.friend = data.info;
+      event.complete();
+    });
   }
 
 

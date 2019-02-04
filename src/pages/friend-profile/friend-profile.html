@@ -14,17 +14,26 @@
 
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  
   <div text-center>
-      <ion-img width="200" height="200" src="../../assets/imgs/{{ friend.friendImg }}.jpg"></ion-img> 
+      <ion-img width="200" height="200" src="../../assets/imgs/ppl1.jpg"></ion-img> 
       <!-- <img src=> -->
   </div>
   <ion-card class="friendName">
     <ion-card-content>
       <ion-card-title>
-        {{ friend.friendName }}
+        {{ friend.name }}
       </ion-card-title>
       <p>
-        {{ friend.friendBio }}
+        {{ friend.bio }}
       </p>
     </ion-card-content>
   </ion-card>
@@ -36,7 +45,7 @@
           </ion-card-title>
           <ion-grid>
             <ion-row>
-              <div *ngFor="let interest of friend.friendInterest">
+              <div *ngFor="let interest of friend.interests">
                   <ion-col col-4 class="interests">
                       <button ion-button outline color="confab2">{{ interest }}</button>
                   </ion-col>
@@ -51,7 +60,7 @@
             <ion-card-title>
               Contact
             </ion-card-title>
-            <p>{{ friend.friendContact }}</p>
+            <p>{{ friend.email }}</p>
           </ion-card-content>
         </ion-card>
 

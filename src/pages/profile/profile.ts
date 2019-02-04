@@ -46,7 +46,13 @@ export class ProfilePage {
         {
           text: 'Update',
           handler: data => {
-              this.profileService.editProfile(this.email, 'name', data.name);
+              this.profileService.editProfile(this.email, 'name', data.name)
+              .subscribe(res => {
+                this.profileService.getProfile(this.email)
+                .subscribe(data => {
+                  this.profile = data.info;
+                });
+              });
           }
         }
       ]
@@ -73,7 +79,13 @@ export class ProfilePage {
         {
           text: 'Update',
           handler: data => {
-            this.profileService.editProfile(this.email, 'bio', data.bio);
+            this.profileService.editProfile(this.email, 'bio', data.bio)
+            .subscribe(res => {
+              this.profileService.getProfile(this.email)
+              .subscribe(data => {
+                this.profile = data.info;
+              });
+            });
           }
         }
       ]
@@ -130,6 +142,14 @@ export class ProfilePage {
       ]
     });
     deleteInterest.present();
+  }
+
+  doRefresh(event) {
+    this.profileService.getProfile(this.email)
+    .subscribe(data => {
+      this.profile = data.info;
+      event.complete();
+    });
   }
 
 }

@@ -1,18 +1,23 @@
-
 <ion-header>
-
   <ion-navbar color="confab">
     <ion-title>
       <ion-searchbar type="text" name="search" [(ngModel)]="search" (change)="onChange()"></ion-searchbar>
     </ion-title>
   </ion-navbar>
-
 </ion-header>
 
-
 <ion-content>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="Pull to refresh"
+          refreshingSpinner="circles"
+          refreshingText="Refreshing...">
+        </ion-refresher-content>
+      </ion-refresher>
+      
       <ion-card *ngFor="let res of searchRes">
-        <ion-card-content>
+        <ion-card-content *ngIf="res.email != usrEmail">
           <ion-grid>
             <ion-row>
               <ion-col col-4>
@@ -31,9 +36,8 @@
                           <button ion-button outline color="confab2">{{ interest }}</button>
                         </ion-col>
                   </div>
-                  
                 </ion-row>
-              <button ion-button round color="confab1" block (click)="connect(res.email)">Connect</button>
+                <button ion-button round color="confab1" block (click)="connect(res.email)">Connect</button>
               <br>
         </ion-card-content>
       </ion-card>
@@ -43,7 +47,7 @@
       </div>
   
         <ion-card *ngFor="let suggestion of suggestions">
-          <ion-card-content>
+          <ion-card-content *ngIf="suggestion.email != usrEmail">
             <ion-grid>
               <ion-row>
                 <ion-col col-4>
