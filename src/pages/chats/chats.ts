@@ -37,8 +37,9 @@ export class ChatsPage {
     }
   }
   
-  chatpage(chatId) {
-    this.navCtrl.push(ChatPage, chatId);
+  chatpage(id, usr1, usrn1, usr2, usrn2) {
+    const data = {ctId: id, user1: usr1, username1: usrn1, user2: usr2, username2: usrn2};
+    this.navCtrl.push(ChatPage, data);
   }
 
   doRefresh(event) {

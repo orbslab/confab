@@ -35,12 +35,12 @@
       
   <ion-list>
     <ion-item-sliding *ngFor="let chat of chats">
-      <ion-item (click)="chatpage(chat._id)">
+      <ion-item (click)="chatpage(chat._id, chat.user1, chat.username1, chat.user2, chat.username2)">
         <ion-avatar item-left>
           <img src="../../../assets/imgs/ppl1.jpg" alt="">
         </ion-avatar>
         <h2>{{ chatName(chat.user1, chat.username1, chat.user2, chat.username2) }}</h2>
-        <p>{{ chat.msg }}</p>
+        <p></p>
       </ion-item>
       <ion-item-options>
         <button ion-button color="dark" outline>
